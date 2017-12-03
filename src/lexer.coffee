@@ -803,8 +803,8 @@ exports.Lexer = class Lexer
       offsetInChunk += index
 
     unless str[...closingDelimiter.length] is closingDelimiter
-      regExError = /// \s+ \#(?!\{) [^\n]* (\/\/\/) ///g
       # Find heregex comment ending with '///'.
+      regExError = /// \s+ \#(?!\{) [^\n]* (\/\/\/) ///g
       if isRegex and errorMatch = regExError.exec @chunk
         {index} = errorMatch
         @error "'#{closingDelimiter}' inside a heregex comment does not close the heregex", length: errorMatch[0].length, offset: index
