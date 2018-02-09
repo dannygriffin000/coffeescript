@@ -367,7 +367,7 @@ test "#2258: allow whitespace-style parameter lists in function definitions", ->
   eq func(1, 2, 3), 2
 
 test "#2621: fancy destructuring in parameter lists", ->
-  func = ({ prop1: { key1 }, prop2: { key2, key3: [a, b, c] } }) ->
+  func = ({ prop1: { key }, prop2: { key2, key3: [a, b, c] } }) ->
     eq(key2, 'key2')
     eq(a, 'a')
 
@@ -469,15 +469,6 @@ test "#4413: expressions in function parameters that create generated variables 
   g = (a = foo() ? bar()) -> a + 1
   eq f(), 33
   eq g(), 34
-
-test "#4673: complex destructured object spread variables", ->
-  # f = ({{a...}...}) ->
-  #   a
-  # eq f(c: 1).c, 1
-
-  g = ({@y...}) ->
-    eq @y.b, 1
-  g b: 1
 
 test "#4657: destructured array param declarations", ->
   a = 1
