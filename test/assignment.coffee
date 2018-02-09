@@ -186,16 +186,16 @@ test "#4787 destructuring of objects within arrays", ->
   deepEqual {a, b}, arr[1]
 
 test "#4798 destructuring of objects with splat within arrays", ->
-  return yes #unless supports "objectRestSpread"
-  arr = [1, {a:1, b:2}]
-  [...,{a, r...}] = arr
-  eq a, 1
-  deepEqual r, {b:2}
-  [b, {q...}] = arr
-  eq b, 1
-  deepEqual q, arr[1]
-  eq q.b, r.b
-  eq q.a, a
+  if supports "objectRestSpread"
+    arr = [1, {a:1, b:2}]
+    [...,{a, r...}] = arr
+    eq a, 1
+    deepEqual r, {b:2}
+    [b, {q...}] = arr
+    eq b, 1
+    deepEqual q, arr[1]
+    eq q.b, r.b
+    eq q.a, a
 
 test "destructuring assignment with splats", ->
   a = {}; b = {}; c = {}; d = {}; e = {}

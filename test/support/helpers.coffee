@@ -25,7 +25,6 @@ diffOutput = (expectedOutput, actualOutput) ->
   #{reset}#{actualOutputLines.join '\n'}#{red}"""
 
 exports.supports = (feature) ->
-  return no
   features =
     objectRestSpread: ->
       try
@@ -33,7 +32,6 @@ exports.supports = (feature) ->
         yes
       catch
         no
-      Number(global.nodeVersion) >= 860
   features[feature]() ? false
 
 exports.eq = (a, b, msg) ->
