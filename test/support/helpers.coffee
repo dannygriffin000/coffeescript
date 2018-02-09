@@ -24,6 +24,14 @@ diffOutput = (expectedOutput, actualOutput) ->
     but instead it was:
   #{reset}#{actualOutputLines.join '\n'}#{red}"""
 
+exports.supports = (feature) ->
+  nodeVersion = process.versions.node.replace /\./g, ''
+  features =
+    objectRestSpread: ->
+        nodeVersion >= 860
+
+  features[feature]() ? false
+
 exports.eq = (a, b, msg) ->
   ok egal(a, b), msg or
   "Expected #{reset}#{a}#{red} to equal #{reset}#{b}#{red}"

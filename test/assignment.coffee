@@ -186,6 +186,7 @@ test "#4787 destructuring of objects within arrays", ->
   deepEqual {a, b}, arr[1]
 
 test "#4798 destructuring of objects with splat within arrays", ->
+  return unless supports "objectRestSpread"
   arr = [1, {a:1, b:2}]
   [...,{a, r...}] = arr
   eq a, 1
@@ -265,6 +266,7 @@ test "destructuring assignment against an expression", ->
   eq b, z
 
 test "destructuring assignment with objects and splats: ES2015", ->
+  return unless supports "objectRestSpread"
   obj = {a: 1, b: 2, c: 3, d: 4, e: 5}
   throws (-> CoffeeScript.compile "{a, r..., s...} = x"), null, "multiple rest elements are disallowed"
   throws (-> CoffeeScript.compile "{a, r..., s..., b} = x"), null, "multiple rest elements are disallowed"
@@ -285,6 +287,7 @@ test "destructuring assignment with objects and splats: ES2015", ->
   eq r.b, undefined
 
 test "destructuring assignment with splats and default values", ->
+  return unless supports "objectRestSpread"
   obj = {}
   c = {b: 1}
   { a: {b} = c, d...} = obj
@@ -302,6 +305,7 @@ test "destructuring assignment with splats and default values", ->
   deepEqual d, {}
 
 test "destructuring assignment with splat with default value", ->
+  return unless supports "objectRestSpread"
   obj = {}
   c = {val: 1}
   { a: {b...} = c } = obj
@@ -309,6 +313,7 @@ test "destructuring assignment with splat with default value", ->
   deepEqual b, val: 1
 
 test "destructuring assignment with multiple splats in different objects", ->
+  return unless supports "objectRestSpread"
   obj = { a: {val: 1}, b: {val: 2} }
   { a: {a...}, b: {b...} } = obj
   deepEqual a, val: 1
@@ -350,6 +355,7 @@ test "destructuring assignment with multiple splats in different objects", ->
   deepEqual b, val: 2
 
 test "destructuring assignment with dynamic keys and splats", ->
+  return unless supports "objectRestSpread"
   i = 0
   foo = -> ++i
 
@@ -362,6 +368,7 @@ test "destructuring assignment with dynamic keys and splats", ->
 
 # Tests from https://babeljs.io/docs/plugins/transform-object-rest-spread/.
 test "destructuring assignment with objects and splats: Babel tests", ->
+  return unless supports "objectRestSpread"
   # What Babel calls “rest properties:”
   { x, y, z... } = { x: 1, y: 2, a: 3, b: 4 }
   eq x, 1
@@ -410,6 +417,7 @@ test "deep destructuring assignment with objects: ES2015", ->
   eq r2.b2, obj.b2
 
 test "deep destructuring assignment with defaults: ES2015", ->
+  return unless supports "objectRestSpread"
   obj =
     b: { c: 1, baz: 'qux' }
     foo: 'bar'
@@ -454,6 +462,7 @@ test "deep destructuring assignment with defaults: ES2015", ->
   deepEqual h, some: 'prop'
 
 test "object spread properties: ES2015", ->
+  return unless supports "objectRestSpread"
   obj = {a: 1, b: 2, c: 3, d: 4, e: 5}
   obj2 = {obj..., c:9}
   eq obj2.c, 9
