@@ -25,10 +25,10 @@ diffOutput = (expectedOutput, actualOutput) ->
   #{reset}#{actualOutputLines.join '\n'}#{red}"""
 
 exports.supports = (feature) ->
-  console.log global.nodeVersion
+  return no
   features =
     objectRestSpread: ->
-      x = try
+      try
         new Function('var {...a} = {}')()
         yes
       catch
