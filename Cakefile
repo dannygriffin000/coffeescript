@@ -431,6 +431,8 @@ runTests = (CoffeeScript) ->
     catch
       no
 
+  global.nodeVersion = process.versions.node.replace /\./g, ''
+
   helpers.extend global, require './test/support/helpers'
 
   # When all the tests have run, collect and print errors.

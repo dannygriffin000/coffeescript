@@ -25,13 +25,15 @@ diffOutput = (expectedOutput, actualOutput) ->
   #{reset}#{actualOutputLines.join '\n'}#{red}"""
 
 exports.supports = (feature) ->
+  console.log global.nodeVersion
   features =
     objectRestSpread: ->
-      try
+      x = try
         new Function('var {...a} = {}')()
         yes
       catch
         no
+      Number(global.nodeVersion) >= 860
   features[feature]() ? false
 
 exports.eq = (a, b, msg) ->
