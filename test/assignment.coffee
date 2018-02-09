@@ -600,18 +600,6 @@ test "#4566: destructuring with nested default values", ->
   {e: {f = 5} = {}} = {}
   eq 5, f
 
-test "#4673: complex destructured object spread variables", ->
-  # b = c: 1
-  # {{a...}...} = b
-  # eq a.c, 1
-
-  d = {}
-  {d.e...} = f: 1
-  eq d.e.f, 1
-
-  # {{g}...} = g: 1
-  # eq g, 1
-
 test "#4878: Compile error when using destructuring with a splat or expansion in an array", ->
   arr = ['a', 'b', 'c', 'd']
 
