@@ -25,11 +25,13 @@ diffOutput = (expectedOutput, actualOutput) ->
   #{reset}#{actualOutputLines.join '\n'}#{red}"""
 
 exports.supports = (feature) ->
-  nodeVersion = process.versions.node.replace /\./g, ''
   features =
     objectRestSpread: ->
-        nodeVersion >= 860
-
+      try
+        new Function('var {...a} = {}')()
+        yes
+      catch
+        no
   features[feature]() ? false
 
 exports.eq = (a, b, msg) ->
