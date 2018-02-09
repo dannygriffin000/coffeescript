@@ -24,16 +24,6 @@ diffOutput = (expectedOutput, actualOutput) ->
     but instead it was:
   #{reset}#{actualOutputLines.join '\n'}#{red}"""
 
-exports.supports = (feature) ->
-  features =
-    objectRestSpread: ->
-      try
-        new Function('var {...a} = {}')()
-        yes
-      catch
-        no
-  features[feature]() ? false
-
 exports.eq = (a, b, msg) ->
   ok egal(a, b), msg or
   "Expected #{reset}#{a}#{red} to equal #{reset}#{b}#{red}"
